@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Spjute Strong — Keystone Consulting Group</title>
+<meta name="description" content="Custom payments, chargeback protection, and business systems proposal for Spjute Strong by Keystone Consulting Group.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#000000;--bg2:#0A0A0A;--bg3:#050505;
+--white:#FFF;--gray:#8A8A8A;--gray2:#555;
+--accent:#7B8EB5;--accent2:#6A7DA4;--accent-glow:rgba(123,142,181,.2);
+--red:#E74C3C;--red2:#C0392B;--red-glow:rgba(231,76,60,.3);
+--green:#2ECC71;--yellow:#F1C40F;--orange:#E67E22;
+--font-head:'Oswald',sans-serif;--font-body:'Inter',sans-serif;
+--ease:cubic-bezier(.25,.46,.45,.94);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;overflow:hidden;height:100%;-webkit-tap-highlight-color:transparent;}
+body{background:var(--bg);color:var(--white);font-family:var(--font-body);height:100%;overflow:hidden;-webkit-font-smoothing:antialiased;}
+
+/* SLIDE BACKGROUND TEXTURE */
+.slide::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+background:
+radial-gradient(ellipse 60% 50% at 50% 40%,rgba(123,142,181,.035),transparent 65%),
+repeating-linear-gradient(0deg,transparent,transparent 99px,rgba(255,255,255,.02) 99px,rgba(255,255,255,.02) 100px),
+repeating-linear-gradient(90deg,transparent,transparent 99px,rgba(255,255,255,.02) 99px,rgba(255,255,255,.02) 100px);
+}
+.slide::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.03;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:128px 128px;}
+.slide>*{position:relative;z-index:1;}
+
+/* PROGRESS BAR */
+#progressBar{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:9999;transition:width .4s var(--ease);width:11.11%;}
+
+/* SLIDE DECK */
+.deck{position:relative;width:100%;height:100vh;overflow:hidden;}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .4s var(--ease);background:#000;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
+.slide.active{opacity:1;pointer-events:auto;z-index:2;}
+.slide:not(.active){z-index:1;}
+
+/* SLIDE INNER */
+.slide-inner{width:100%;max-width:1100px;margin:0 auto;padding:60px 60px 100px;display:flex;flex-direction:column;}
+.slide-inner.center-align{justify-content:center;min-height:100vh;}
+.slide-inner.top-align{justify-content:flex-start;padding-top:50px;}
+
+/* FOOTER */
+.slide-footer{padding:16px 60px;display:flex;justify-content:space-between;font-size:11px;color:var(--gray2);letter-spacing:.5px;text-transform:uppercase;pointer-events:none;margin-top:auto;flex-shrink:0;}
+
+/* NAV */
+.nav{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:16px;z-index:9998;padding:12px 0 16px;background:linear-gradient(transparent,rgba(0,0,0,.95) 40%);}
+.nav-btn{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:var(--white);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.nav-btn:hover{background:rgba(123,142,181,.15);border-color:var(--accent);}
+.nav-counter{color:var(--gray);font-size:13px;font-variant-numeric:tabular-nums;}
+
+/* TYPOGRAPHY */
+h1,h2,h3{font-family:var(--font-head);text-transform:uppercase;letter-spacing:2px;line-height:1.1;font-weight:700;}
+.headline{font-size:clamp(42px,7vw,72px);color:var(--white);margin-bottom:8px;}
+.subheadline{font-size:clamp(16px,2.5vw,22px);color:var(--gray);font-family:var(--font-body);font-weight:400;letter-spacing:.5px;text-transform:none;line-height:1.5;}
+.section-header{font-size:clamp(28px,4.5vw,44px);color:var(--white);margin-bottom:24px;}
+.section-sub{font-size:clamp(14px,1.8vw,17px);color:var(--gray);line-height:1.7;max-width:800px;margin-bottom:32px;}
+
+/* ACCENT HR */
+.accent-hr{height:2px;background:var(--accent);border:none;margin:20px auto;width:0;transition:width 1s var(--ease);}
+.accent-hr.visible{width:60%;}
+
+/* STAT BLOCKS */
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:32px 0;}
+.stat-box{text-align:center;padding:28px 16px;border:1px solid rgba(255,255,255,.06);border-radius:4px;background:rgba(255,255,255,.02);}
+.stat-num{font-family:var(--font-head);font-size:clamp(36px,5vw,56px);color:var(--accent);letter-spacing:1px;}
+.stat-label{font-size:13px;color:var(--gray);margin-top:6px;text-transform:uppercase;letter-spacing:1px;}
+
+/* TABLES */
+.data-table{width:100%;border-collapse:collapse;margin:24px 0;}
+.data-table th{text-align:left;padding:12px 16px;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--accent);border-bottom:1px solid rgba(123,142,181,.3);font-weight:600;}
+.data-table td{padding:12px 16px;font-size:14px;color:var(--white);border-bottom:1px solid rgba(255,255,255,.06);}
+.data-table tr:last-child td{border-bottom:none;font-weight:700;color:var(--accent);}
+.data-table tr{opacity:0;transform:translateY(10px);transition:all .4s var(--ease);}
+.data-table tr.visible{opacity:1;transform:translateY(0);}
+
+/* CALLOUT */
+.callout{border-left:3px solid var(--accent);padding:20px 24px;margin:24px 0;background:rgba(123,142,181,.04);border-radius:0 4px 4px 0;font-size:15px;line-height:1.6;color:var(--white);opacity:0;transform:translateY(10px);transition:all .5s var(--ease);}
+.callout.visible{opacity:1;transform:translateY(0);}
+.callout.red{border-left-color:var(--red);background:rgba(231,76,60,.05);}
+
+/* WARNING */
+.warning-banner{background:rgba(231,76,60,.12);border:1px solid rgba(231,76,60,.3);padding:14px 20px;border-radius:6px;color:var(--red);font-weight:600;font-size:14px;text-align:center;margin-bottom:24px;animation:redPulse 3s ease-in-out infinite;}
+@keyframes redPulse{0%,100%{box-shadow:0 0 0 0 rgba(231,76,60,0);}50%{box-shadow:0 0 20px 0 rgba(231,76,60,.15);}}
+
+/* GRID LAYOUTS */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+
+/* ICON BOX */
+.icon-box{padding:24px;border:1px solid rgba(255,255,255,.06);border-radius:4px;background:rgba(255,255,255,.02);opacity:0;transform:scale(.95);transition:all .4s var(--ease);}
+.icon-box.visible{opacity:1;transform:scale(1);}
+.icon-box .icon{font-size:28px;margin-bottom:12px;display:block;}
+.icon-box h4{font-family:var(--font-head);font-size:18px;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;color:var(--white);}
+.icon-box p{font-size:13px;color:var(--gray);line-height:1.6;}
+
+/* RECEIPTS */
+.receipt-row{display:flex;gap:32px;justify-content:center;margin:32px 0;}
+.receipt{background:var(--white);color:#111;padding:32px;border-radius:8px;width:300px;font-family:var(--font-body);box-shadow:0 8px 32px rgba(0,0,0,.4);}
+.receipt h4{font-family:var(--font-head);font-size:20px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;text-align:center;}
+.receipt .line{display:flex;justify-content:space-between;padding:8px 0;font-size:14px;border-bottom:1px dashed #ddd;}
+.receipt .total{border-top:2px solid #111;border-bottom:none;font-weight:700;font-size:16px;margin-top:8px;padding-top:12px;}
+.receipt .discount{color:var(--green);}
+.receipt .note{font-size:11px;color:#888;margin-top:8px;font-style:italic;}
+.receipt-left{opacity:0;transform:translateX(-40px);transition:all .6s var(--ease);}
+.receipt-right{opacity:0;transform:translateX(40px);transition:all .6s var(--ease);}
+.receipt-left.visible,.receipt-right.visible{opacity:1;transform:translateX(0);}
+
+/* PRICING SECTION */
+.price-card{border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:32px;background:rgba(255,255,255,.02);}
+.price-card h4{font-family:var(--font-head);font-size:22px;letter-spacing:1px;color:var(--accent);margin-bottom:4px;text-transform:uppercase;}
+.price-card .price{font-family:var(--font-head);font-size:36px;color:var(--white);margin:8px 0 16px;}
+.price-card ul{list-style:none;padding:0;}
+.price-card li{font-size:13px;color:var(--gray);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.price-card li::before{content:'✓ ';color:var(--accent);}
+
+/* CTA */
+.cta-btn{display:inline-block;padding:16px 40px;background:var(--accent);color:var(--white);font-family:var(--font-head);font-size:20px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;text-decoration:none;animation:ctaGlow 3s ease-in-out infinite;transition:transform .2s;}
+.cta-btn:hover{transform:scale(1.03);}
+@keyframes ctaGlow{0%,100%{box-shadow:0 0 0 0 rgba(123,142,181,0);}50%{box-shadow:0 0 20px 0 rgba(123,142,181,.2);}}
+
+/* STEPS */
+.step{display:flex;gap:16px;align-items:flex-start;padding:16px 0;opacity:0;transform:translateY(15px);transition:all .4s var(--ease);}
+.step.visible{opacity:1;transform:translateY(0);}
+.step-num{width:36px;height:36px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:18px;color:var(--accent);flex-shrink:0;}
+.step h4{font-family:var(--font-head);font-size:17px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.step p{font-size:13px;color:var(--gray);line-height:1.5;}
+
+/* CONTACT */
+.contact-card{text-align:center;padding:20px;}
+.contact-card h4{font-family:var(--font-head);font-size:20px;letter-spacing:1px;color:var(--white);margin-bottom:8px;}
+.contact-card a{color:var(--accent);text-decoration:none;font-size:14px;display:block;margin:4px 0;}
+
+/* BAR CHART */
+.bar-chart{margin:24px 0;}
+.bar-row{display:flex;align-items:center;gap:12px;margin:10px 0;}
+.bar-label{font-size:12px;color:var(--gray);width:180px;text-align:right;flex-shrink:0;}
+.bar-track{flex:1;height:28px;background:rgba(255,255,255,.05);border-radius:4px;position:relative;overflow:hidden;}
+.bar-fill{height:100%;border-radius:4px;width:0;transition:width 1.2s var(--ease);}
+.bar-fill.visible{width:var(--w);}
+.bar-marker{position:absolute;top:-4px;bottom:-4px;width:2px;left:var(--pos);z-index:2;}
+
+/* POWERED BY */
+.powered{text-align:center;padding:20px;font-size:11px;text-transform:uppercase;letter-spacing:1px;}
+.powered a{color:var(--white);opacity:.4;text-decoration:none;transition:opacity .3s;}
+.powered a:hover{opacity:.9;}
+
+/* BONUS CALLOUT */
+.bonus-box{border:1px solid rgba(123,142,181,.2);border-radius:4px;padding:24px;margin:20px 0;background:rgba(123,142,181,.03);}
+.bonus-box .tag{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:10px;display:block;}
+.bonus-box h4{font-family:var(--font-head);font-size:18px;letter-spacing:1px;color:var(--white);margin-bottom:8px;text-transform:uppercase;}
+.bonus-box p{font-size:13px;color:var(--gray);line-height:1.6;}
+
+/* FEATURE STRIP */
+.feature-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0;}
+.feature-strip .feat{text-align:center;padding:20px;border:1px solid rgba(255,255,255,.06);border-radius:4px;background:rgba(255,255,255,.02);}
+.feature-strip .feat .icon{font-size:24px;margin-bottom:8px;}
+.feature-strip .feat h4{font-family:var(--font-head);font-size:16px;letter-spacing:1px;margin-bottom:6px;text-transform:uppercase;}
+.feature-strip .feat p{font-size:12px;color:var(--gray);line-height:1.5;}
+
+/* ROI CALLOUT */
+.roi-callout{text-align:center;padding:32px;border:1px solid rgba(123,142,181,.3);border-radius:4px;margin:32px 0;background:rgba(123,142,181,.03);}
+.roi-callout .big{font-family:var(--font-head);font-size:clamp(32px,5vw,48px);color:var(--accent);letter-spacing:1px;}
+.roi-callout p{color:var(--gray);font-size:14px;margin-top:8px;line-height:1.6;}
+
+/* ANIMATION: prefers-reduced-motion */
+@media(prefers-reduced-motion:reduce){
+*{animation:none!important;transition-duration:0s!important;}
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+.slide-inner{padding:30px 20px 80px;}
+.slide-footer{padding:10px 20px;}
+.stat-row,.grid-3,.grid-4,.feature-strip{grid-template-columns:1fr;}
+.grid-2{grid-template-columns:1fr;}
+.receipt-row{flex-direction:column;align-items:center;}
+.receipt{width:100%;max-width:340px;}
+.receipt-left,.receipt-right{transform:translateY(20px);}
+.receipt-left.visible,.receipt-right.visible{transform:translateY(0);}
+.bar-label{width:120px;font-size:11px;}
+.price-card .price{font-size:28px;}
+.section-header{font-size:clamp(24px,5vw,36px);margin-bottom:16px;}
+.icon-box{padding:16px;}
+.icon-box p{font-size:12px;}
+.callout{padding:14px 16px;font-size:13px;}
+.bonus-box{padding:16px;}
+video{max-width:100%!important;height:auto!important;}
+}
+@media(max-width:480px){
+.slide-inner{padding:24px 16px 80px;}
+.stat-num{font-size:clamp(28px,8vw,40px);}
+.section-header{font-size:clamp(22px,5vw,32px);}
+}
+</style>
+</head>
+<body>
+<div id="progressBar"></div>
+<div class="deck" id="deck">
+
+<!-- ==================== SLIDE 1: TITLE ==================== -->
+<div class="slide active" id="slide-1">
+<div class="slide-inner center-align" style="text-align:center;">
+<h1 class="headline anim-fade" data-anim="fade">SPJUTE <span style="color:var(--accent)">STRONG</span></h1>
+<hr class="accent-hr" id="titleHr">
+<p class="subheadline anim-fade" data-anim="fade" style="margin-top:16px;">Stronger Payments. Smarter Systems. Zero Fees.</p>
+
+<div style="margin-top:48px;opacity:.7;font-size:13px;color:var(--gray);line-height:2;">
+<p style="font-family:var(--font-head);font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Presented by</p>
+<div class="grid-2" style="max-width:460px;margin:0 auto;gap:32px;">
+<div>
+<p style="font-family:var(--font-head);font-size:17px;letter-spacing:1px;color:var(--white);text-transform:uppercase;">Hunter Lodwick</p>
+<p><a href="tel:5055066563" style="color:var(--gray);text-decoration:none;">505-506-6563</a></p>
+<p><a href="mailto:hunter@keystoneconsultingg.com" style="color:var(--gray);text-decoration:none;font-size:12px;">hunter@keystoneconsultingg.com</a></p>
+</div>
+<div>
+<p style="font-family:var(--font-head);font-size:17px;letter-spacing:1px;color:var(--white);text-transform:uppercase;">Seth Redford</p>
+<p><a href="tel:3855223239" style="color:var(--gray);text-decoration:none;">385-522-3239</a></p>
+<p><a href="mailto:seth@keystoneconsultingg.com" style="color:var(--gray);text-decoration:none;font-size:12px;">seth@keystoneconsultingg.com</a></p>
+</div>
+</div>
+<p style="margin-top:12px;font-size:11px;letter-spacing:1px;text-transform:uppercase;"><a href="https://www.keystoneconsultingg.com/" target="_blank" rel="noopener noreferrer" style="color:var(--gray);text-decoration:none;">keystoneconsultingg.com</a></p>
+</div>
+</div>
+<div class="slide-footer">
+<span>Keystone Consulting Group &nbsp;·&nbsp; Prepared for CJ &amp; Sydnee Spjute</span>
+<span>April 2026</span>
+</div>
+</div>
+
+<!-- ==================== SLIDE 2: THE PROBLEM ==================== -->
+<div class="slide" id="slide-2">
+<div class="slide-inner top-align">
+<h2 class="section-header anim-fade" data-anim="fade">Let's Talk About What Stripe Is Actually Costing You</h2>
+<p class="section-sub anim-fade" data-anim="fade">You've built something special — a coaching business averaging $70K/month with high months hitting $120K. But every single transaction is bleeding margin to Stripe. At your scale, that bleed adds up fast.</p>
+<div class="stat-row">
+<div class="stat-box anim-fade" data-anim="fade"><div class="stat-num" data-count="2400" data-prefix="$">$0</div><div class="stat-label">Avg Fees / Month</div></div>
+<div class="stat-box anim-fade" data-anim="fade"><div class="stat-num" data-count="3200" data-prefix="$">$0</div><div class="stat-label">High Month Fees</div></div>
+<div class="stat-box anim-fade" data-anim="fade"><div class="stat-num" data-count="3.495" data-suffix="%" data-decimals="3">0%</div><div class="stat-label">Effective Rate</div></div>
+</div>
+
+<div class="stat-row" style="margin-top:0;">
+<div class="stat-box anim-fade" data-anim="fade" style="border-color:rgba(231,76,60,.2);">
+<div class="stat-num" data-count="49818" data-prefix="$" style="color:var(--red);">$0</div>
+<div class="stat-label" style="color:var(--red);">Failed Payments Last Year</div>
+</div>
+<div class="stat-box anim-fade" data-anim="fade" style="border-color:rgba(231,76,60,.2);">
+<div class="stat-num" data-count="12971" data-prefix="$" style="color:var(--red);">$0</div>
+<div class="stat-label" style="color:var(--red);">Permanently Lost</div>
+</div>
+<div class="stat-box anim-fade" data-anim="fade" style="border-color:rgba(231,76,60,.2);">
+<div class="stat-num" data-count="14.1" data-suffix="%" data-decimals="1" style="color:var(--red);">0%</div>
+<div class="stat-label" style="color:var(--red);">Payment Failure Rate</div>
+</div>
+</div>
+<table class="data-table">
+<thead><tr><th>Month Type</th><th>Revenue</th><th>Stripe Fees</th></tr></thead>
+<tbody>
+<tr><td>Average Month ($70K)</td><td>$70,000</td><td>~$2,447</td></tr>
+<tr><td>High Month ($120K)</td><td>$120,000</td><td>~$4,194</td></tr>
+<tr><td>Low Month ($60K)</td><td>$60,000</td><td>~$2,097</td></tr>
+<tr><td style="color:var(--accent);font-weight:700">Annual Total (avg)</td><td style="color:var(--accent);font-weight:700">~$840K</td><td style="color:var(--accent);font-weight:700">~$29,358</td></tr>
+</tbody>
+</table>
+<div class="callout">"You're paying Stripe the equivalent of a full-time employee's salary every single year — just to move money your clients already owe you."</div>
+<div class="callout" style="margin-top:12px;">"At 3.495%, you're paying 30–40% MORE than the industry standard of 2.5–2.9%. Stripe charges a premium for convenience, and you've been absorbing it."</div>
+<div class="callout" style="margin-top:12px;">"On top of that — $49,818 in failed payments last year. $36,847 was eventually recovered, but $12,971 was permanently lost. That's a 14.1% failure rate on attempted charges. With the right systems, we can drive that number significantly lower."</div>
+<div class="callout" style="margin-top:12px;">"Between processing fees and unrecovered failed payments, you're leaving over $42K on the table every year. That's money that should be going into scaling — not leaking out through preventable system gaps."</div>
+</div>
+<div class="slide-footer"><span>Keystone Consulting Group</span><span>2 / 9</span></div>
+</div>
+
+<!-- ==================== SLIDE 3: CHARGEBACK CRISIS ==================== -->
+<div class="slide" id="slide-3">
+<div class="slide-inner top-align">
+<h2 class="section-header anim-fade" data-anim="fade">15% Chargeback Ratio. The Industry Cap Is 1%.</h2>
+<div class="warning-banner">⚠️ This is the single biggest threat to your business right now.</div>
+
+<div style="text-align:center;margin:24px 0;">
+<div class="stat-num" data-count="15" data-suffix="%" data-dur="1500" style="font-size:clamp(56px,12vw,96px);color:var(--red);">0%</div>
+<p style="color:var(--gray);font-size:14px;margin-top:4px;">Your current chargeback-to-sales ratio by dollar volume</p>
+<p style="color:var(--red);font-size:clamp(16px,2.5vw,20px);font-weight:700;margin-top:12px;">That's 15× over the threshold that gets merchants banned from accepting cards entirely.</p>
+</div>
+
+<div class="bar-chart">
+<div class="bar-row"><span class="bar-label">Industry Safe Zone (0–0.9%)</span><div class="bar-track"><div class="bar-fill" style="--w:6%;background:var(--green);"></div></div></div>
+<div class="bar-row"><span class="bar-label">Visa/MC Hard Cap (1.0%)</span><div class="bar-track"><div class="bar-fill" style="--w:6.67%;background:var(--yellow);"></div></div></div>
+<div class="bar-row"><span class="bar-label">VAMP/ECM Threshold (1.5%)</span><div class="bar-track"><div class="bar-fill" style="--w:10%;background:var(--orange);"></div></div></div>
+<div class="bar-row"><span class="bar-label" style="color:var(--red);font-weight:600;">Spjute Strong (15%)</span><div class="bar-track"><div class="bar-fill" style="--w:100%;background:linear-gradient(90deg,var(--red2),var(--red));"></div></div></div>
+</div>
+
+<p class="callout red" style="text-align:center;font-weight:600;">You are not close to the edge. You are miles past it.</p>
+
+<h3 style="font-family:var(--font-head);font-size:20px;letter-spacing:1px;margin:24px 0 16px;color:var(--white);">THIS IS WHAT'S ALREADY HAPPENING</h3>
+
+<div class="grid-2">
+<div>
+<h4 style="font-family:var(--font-head);font-size:15px;letter-spacing:1px;color:var(--accent);margin-bottom:16px;">THE PROGRAMS WATCHING YOU</h4>
+<div class="icon-box" style="margin-bottom:12px;border-color:rgba(231,76,60,.2);"><span class="icon">⚠️</span><h4>Visa VAMP Program</h4><p>Visa's Acquirer Monitoring Program flags merchants above 0.9%. You're currently 16.6× over. Once flagged, your processor is fined monthly — and those fines get passed directly to you.</p></div>
+<div class="icon-box" style="margin-bottom:12px;border-color:rgba(231,76,60,.2);"><span class="icon">⚠️</span><h4>Mastercard ECM Program</h4><p>ECM kicks in at 1.5% for 2+ consecutive months. Monthly fines start at $1,000 and scale to $25,000+. You are 10× over the hard cap.</p></div>
+<div class="icon-box" style="border-color:rgba(231,76,60,.2);"><span class="icon">⚠️</span><h4>MATCH List (TMF)</h4><p>Operated by Mastercard. Once placed on MATCH, you are effectively BLACKLISTED from accepting cards with every major processor in the US — for 5 years. No appeals.</p></div>
+</div>
+<div>
+<h4 style="font-family:var(--font-head);font-size:15px;letter-spacing:1px;color:var(--accent);margin-bottom:16px;">WHAT ACTUALLY HAPPENS</h4>
+<div class="icon-box" style="margin-bottom:12px;border-color:rgba(231,76,60,.2);"><span class="icon">✕</span><h4>Account Frozen Without Warning</h4><p>Stripe freezes accounts over 1% routinely. Funds held up to 180 days. At 15%, you are operating on borrowed time every single day.</p></div>
+<div class="icon-box" style="margin-bottom:12px;border-color:rgba(231,76,60,.2);"><span class="icon">✕</span><h4>Merchant Account Terminated</h4><p>Stripe can close your account tomorrow. Every client payment blocked. Recurring subscriptions fail overnight. Cash flow disappears.</p></div>
+<div class="icon-box" style="margin-bottom:12px;border-color:rgba(231,76,60,.2);"><span class="icon">✕</span><h4>Blacklisted From Every Processor</h4><p>MATCH placement means Stripe, Square, PayPal, Shopify Payments, Helcim, Clover — all deny your application. Cash-only overnight.</p></div>
+<div class="icon-box" style="border-color:rgba(231,76,60,.2);"><span class="icon">✕</span><h4>5-Year Sentence</h4><p>MATCH listings stay for 5 full years. Every recurring client you've fought to earn — gone.</p></div>
+</div>
+</div>
+
+<div class="callout red" style="margin-top:24px;border-left-color:var(--accent);background:rgba(123,142,181,.04);font-weight:600;">"Stripe is already watching you. Every transaction you run today pushes you closer to a freeze. This isn't a theoretical risk — it's a countdown clock."</div>
+<div class="callout red" style="margin-top:8px;">"By the time Stripe acts, it's too late. The only way out is getting ahead of this NOW."</div>
+
+<p style="font-size:11px;color:var(--gray2);margin-top:16px;">Sources: Mastercard ECM/ECP Guidelines · Visa VAMP Program · Mastercard MATCH (TMF) System Documentation</p>
+</div>
+<div class="slide-footer"><span>Keystone Consulting Group</span><span>3 / 9</span></div>
+</div>
+
+<!-- ==================== SLIDE 4: CHARGEBACK PROTECTION ==================== -->
+<div class="slide" id="slide-4">
+<div class="slide-inner top-align">
+<h2 class="section-header anim-fade" data-anim="fade">A Chargeback Mitigation Framework</h2>
+<p class="section-sub anim-fade" data-anim="fade">Before we even talk about saving you money, we have to talk about keeping you in business. Here's the framework we'll guide you through to dramatically reduce your chargeback exposure.</p>
+
+<div class="grid-4" style="margin-bottom:20px;">
+<div class="icon-box"><span class="icon">🛡️</span><h4>Clear Billing Descriptors</h4><p>We'll help you update your merchant descriptor to clearly read "SPJUTE STRONG COACHING" — eliminating the #1 cause of chargebacks: customers not recognizing the charge.</p></div>
+<div class="icon-box"><span class="icon">📄</span><h4>DocuSign + Payment Bundle</h4><p>We'll guide you through setting up a clear coaching agreement that every new client signs before the first charge — with terms, refund policy, cancellation policy, and chargeback policy embedded.</p></div>
+<div class="icon-box"><span class="icon">🔔</span><h4>Pre-Charge Notifications</h4><p>We'll help you configure automated SMS/email 3 days before every recurring charge. Customers cancel through you instead of disputing with their bank.</p></div>
+<div class="icon-box"><span class="icon">✓</span><h4>Rapid Dispute Response</h4><p>We'll walk you through building an evidence package system — signed agreements, Trainerize logs, payment history — so you can respond to disputes within the 48-hour window.</p></div>
+</div>
+
+<div class="grid-2" style="margin-bottom:20px;">
+<div class="icon-box"><span class="icon">🔒</span><h4>ACH / Zelle Incentive</h4><p>We'll help you structure incentives to move clients to ACH, Zelle, or Venmo for recurring billing — which drops chargeback risk to near-zero.</p></div>
+<div class="icon-box"><span class="icon">📅</span><h4>Account Monitoring Guidance</h4><p>We'll show you how to monitor your chargeback ratio weekly and set up alerts so you're never caught off guard when a metric approaches threshold.</p></div>
+</div>
+
+<h3 style="font-family:var(--font-head);font-size:18px;letter-spacing:1px;margin:24px 0 16px;color:var(--white);text-transform:uppercase;">Reducing Your 14.1% Payment Failure Rate</h3>
+<p class="section-sub" style="margin-bottom:16px;">Last year, $49,818 in payments failed. You recovered $36,847 — but $12,971 was permanently lost. A 14.1% failure rate means 1 in 7 payment attempts is failing. Here's how we help drive that rate down:</p>
+
+<div class="grid-3" style="margin-bottom:20px;">
+<div class="icon-box"><span class="icon">🚫</span><h4>Block Prepaid Cards</h4><p>Prepaid and gift cards are the #1 source of failed recurring payments. We'll help you configure your processor to decline prepaid cards as a payment method — only real debit/credit cards accepted.</p></div>
+<div class="icon-box"><span class="icon">🔄</span><h4>Auto Follow-Ups on Missed Payments</h4><p>When a payment fails, the system automatically sends SMS + email reminders to the client with a secure payment link. No manual chasing — Haley doesn't have to track down every failed charge.</p></div>
+<div class="icon-box"><span class="icon">💳</span><h4>Card Updater Service</h4><p>When clients' cards expire or get reissued, the processor automatically pulls updated card details from the issuing bank — preventing failed charges before they happen.</p></div>
+</div>
+
+<div class="bonus-box">
+<span class="tag">Exploring For You</span>
+<h4>🛡️ Chargeback 911 Partnership</h4>
+<p>We'll look into whether Chargeback 911 is a good fit for Spjute Strong — it's an industry-leading chargeback mitigation platform that adds automated dispute response and fraud prevention. Given your current ratio, this is worth exploring.</p>
+</div>
+
+<div class="bonus-box">
+<span class="tag">Migration Support</span>
+<h4>🔄 Client Migration Guidance</h4>
+<p>We'll guide you through the process of retrieving existing card data from Stripe so your recurring clients can transfer seamlessly — zero payment interruption. This typically incurs a one-time data transfer cost of $500–$800, billed directly from the retrieval process.</p>
+</div>
+
+<div class="callout" style="margin-top:8px;"><strong style="color:var(--accent);">"We don't just point you in the right direction — we walk beside you through every step of protecting your merchant account."</strong></div>
+</div>
+<div class="slide-footer"><span>Keystone Consulting Group</span><span>4 / 9</span></div>
+</div>
+
+<!-- ==================== SLIDE 5: DUAL PRICING ==================== -->
+<div class="slide" id="slide-5">
+<div class="slide-inner top-align">
+<h2 class="section-header anim-fade" data-anim="fade">0% Processing. You Keep Every Dollar You Earn.</h2>
+<p class="section-sub anim-fade" data-anim="fade">Dual pricing gives your clients two transparent options — you pay nothing on card transactions.</p>
+
+<div class="receipt-row">
+<div class="receipt receipt-left">
+<h4>Standard Price (Card)</h4>
+<div class="line"><span>Monthly Coaching</span><span>$299.00</span></div>
+<div class="line total"><span>Total</span><span>$299.00</span></div>
+</div>
+<div class="receipt receipt-right">
+<h4>Cash Discount Price</h4>
+<div class="line"><span>Monthly Coaching</span><span>$299.00</span></div>
+<div class="line discount"><span>Cash Discount (4%)</span><span>-$11.96</span></div>
+<div class="line total"><span>Total</span><span>$287.04</span></div>
+<p class="note">*Applies to Zelle, Venmo, and ACH payments</p>
+</div>
+</div>
+
+<p class="section-sub" style="text-align:center;max-width:700px;margin:0 auto 24px;">The standard price is the standard price. Clients paying via Zelle, Venmo, or ACH get an automatic 4% discount. No convenience fees. No surcharges. 100% transparent and compliant.</p>
+
+<h3 style="font-family:var(--font-head);font-size:18px;letter-spacing:1px;margin:28px 0 16px;color:var(--white);text-transform:uppercase;">Why Dual Pricing — Not Surcharging</h3>
+
+<div class="grid-2" style="margin-bottom:24px;">
+<div class="icon-box">
+<h4 style="color:var(--accent);">Dual Pricing ✓</h4>
+<ul style="list-style:none;padding:0;margin-top:12px;">
+<li style="font-size:13px;color:var(--gray);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);"><span style="color:var(--accent);">✓</span> Two prices displayed upfront — card price and cash/ACH price</li>
+<li style="font-size:13px;color:var(--gray);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);"><span style="color:var(--accent);">✓</span> Legal in all 50 states — no restrictions</li>
+<li style="font-size:13px;color:var(--gray);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);"><span style="color:var(--accent);">✓</span> Feels like a discount, not a penalty</li>
+<li style="font-size:13px;color:var(--gray);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);"><span style="color:var(--accent);">✓</span> No negative customer perception</li>
+<li style="font-size:13px;color:var(--gray);padding:6px 0;"><span style="color:var(--accent);">✓</span> Encourages ACH/Zelle adoption → fewer chargebacks</li>
+</ul>
+</div>
+<div class="icon-box">
+<h4 style="color:var(--red);">Surcharging ✕</h4>
+<ul style="list-style:none;padding:0;margin-top:12px;">
+<li style="font-size:13px;color:var(--gray);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);"><span style="color:var(--red);">✕</span> Adds a fee on top of the listed price at checkout</li>
+<li style="font-size:13px;color:var(--gray);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);"><span style="color:var(--red);">✕</span> Illegal in several states (CT, MA, PR, etc.)</li>
+<li style="font-size:13px;color:var(--gray);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);"><span style="color:var(--red);">✕</span> Feels like a punishment for paying with a card</li>
+<li style="font-size:13px;color:var(--gray);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);"><span style="color:var(--red);">✕</span> Increases cart abandonment and client frustration</li>
+<li style="font-size:13px;color:var(--gray);padding:6px 0;"><span style="color:var(--red);">✕</span> Subject to Visa/Mastercard surcharge caps and rules</li>
+</ul>
+</div>
+</div>
+
+<div class="callout">With dual pricing, there's no extra fee — just two clearly posted prices. Your clients choose. The experience is clean, transparent, and never feels like a penalty. It's built into the system seamlessly from day one.</div>
+
+<div class="callout" style="text-align:center;">
+<strong style="color:var(--accent);">"This Also Happens to Solve Your Chargeback Problem."</strong><br>
+<span style="color:var(--gray);font-size:14px;">Every client you move to ACH, Zelle, or Venmo is one less card transaction that can ever be charged back. This is a revenue protection strategy disguised as a discount program.</span>
+</div>
+
+<div class="feature-strip">
+<div class="feat icon-box"><span class="icon">🛡️</span><h4>100% Compliant</h4><p>Dual pricing is legally distinct from surcharging. Both prices displayed upfront. Fully compliant across all 50 states.</p></div>
+<div class="feat icon-box"><span class="icon">💰</span><h4>$29/month Flat</h4><p>No percentage fees. No per-transaction charges. Scale from $70K to $200K months — your cost stays flat.</p></div>
+<div class="feat icon-box"><span class="icon">🚫</span><h4>No Contracts. Ever.</h4><p>We don't earn your business, we don't keep your business. Cancel anytime. No cancellation fees. 2 months FREE to start.</p></div>
+</div>
+</div>
+<div class="slide-footer"><span>Keystone Consulting Group</span><span>5 / 9</span></div>
+</div>
+
+<!-- ==================== SLIDE 6: FINANCIAL IMPACT ==================== -->
+<div class="slide" id="slide-6">
+<div class="slide-inner top-align">
+<h2 class="section-header anim-fade" data-anim="fade">What This Actually Saves You</h2>
+
+<table class="data-table">
+<thead><tr><th>Cost Category</th><th style="color:var(--gray);">Current (Stripe)</th><th style="color:var(--accent);">With Keystone</th></tr></thead>
+<tbody>
+<tr><td>Monthly Revenue (avg)</td><td style="color:var(--gray);">$70,000</td><td>$70,000</td></tr>
+<tr><td>Effective Processing Rate</td><td style="color:var(--gray);">3.495%</td><td style="color:var(--accent);">0% (Dual Pricing)</td></tr>
+<tr><td>Monthly Processing Fees</td><td style="color:var(--gray);">~$2,447</td><td style="color:var(--accent);">$29 flat</td></tr>
+<tr><td style="font-weight:700;">Monthly Savings</td><td style="color:var(--gray);">—</td><td style="color:var(--accent);font-weight:700;">~$2,418</td></tr>
+<tr><td>Annual Processing Fees</td><td style="color:var(--gray);">~$29,358</td><td style="color:var(--accent);">$348</td></tr>
+<tr><td style="color:var(--accent);font-weight:700;">ANNUAL SAVINGS</td><td style="color:var(--gray);">—</td><td style="color:var(--accent);font-weight:700;">~$29,010</td></tr>
+</tbody>
+</table>
+
+<div class="roi-callout">
+<div class="big" data-count="29000" data-prefix="$" data-suffix="+">$0+</div>
+<p>Back in your business every single year from processing savings alone.</p>
+</div>
+
+<div class="callout" style="text-align:center;margin-bottom:24px;"><strong style="color:var(--accent);">And that's before addressing your 14.1% payment failure rate.</strong><br><span style="color:var(--gray);font-size:14px;">$12,971 was permanently lost last year from failed payments alone. With prepaid card blocking, automated follow-ups, and card updater services, we can push that failure rate significantly lower — recovering revenue that's currently falling through the cracks.</span></div>
+
+<div class="grid-3">
+<div class="icon-box" style="text-align:center;"><span class="icon">🏋️</span><h4>A New Coach Salary</h4><p>Hire a third coach and scale your capacity without adding overhead.</p></div>
+<div class="icon-box" style="text-align:center;"><span class="icon">📈</span><h4>A 6-Figure Marketing Budget</h4><p>Scale to $200K months with paid acquisition and content.</p></div>
+<div class="icon-box" style="text-align:center;"><span class="icon">🏠</span><h4>Your Mortgage Paid</h4><p>Or your kids' tuition. Or your next family trip. It's yours — not Stripe's.</p></div>
+</div>
+</div>
+<div class="slide-footer"><span>Keystone Consulting Group</span><span>6 / 9</span></div>
+</div>
+
+<!-- ==================== SLIDE 7: VALUE-ADD ==================== -->
+<div class="slide" id="slide-7">
+<div class="slide-inner top-align">
+<h2 class="section-header anim-fade" data-anim="fade">A Custom System Built for <span style="color:var(--accent)">Scale</span></h2>
+<p class="section-sub anim-fade" data-anim="fade">Payments are just the start. We're building the operational backbone Spjute Strong needs to scale to $200K+ months — and free up your team to focus on what actually grows the business.</p>
+
+<div class="callout" style="margin-bottom:24px;">Every system we build is designed to eliminate manual busywork. That means Haley isn't spending hours on data entry, client onboarding follow-ups, or payment tracking — she's free to focus on higher-value work that actually moves the needle for Spjute Strong.</div>
+
+<!-- CRM VIDEO -->
+<div style="margin:24px 0;">
+<h4 style="font-family:var(--font-head);font-size:16px;letter-spacing:1px;color:var(--accent);margin-bottom:12px;text-transform:uppercase;">Your Custom CRM — In Action</h4>
+<video controls muted playsinline preload="metadata" style="width:100%;max-width:900px;border-radius:4px;border:1px solid rgba(255,255,255,.08);background:#000;" poster="">
+<source src="spjute-strong-crm.mov" type="video/quicktime">
+<source src="spjute-strong-crm.mov" type="video/mp4">
+Your browser does not support video playback.
+</video>
+<p style="font-size:12px;color:var(--gray2);margin-top:8px;">↑ A preview of the custom CRM we're building for Spjute Strong</p>
+</div>
+
+<div class="grid-2">
+<div>
+<h4 style="font-family:var(--font-head);font-size:16px;letter-spacing:1px;color:var(--accent);margin-bottom:16px;">WEBSITE + CRM BUILD</h4>
+<div class="icon-box" style="margin-bottom:12px;"><span class="icon">🌐</span><h4>Custom Website Rebuild</h4><p>Clean, minimal, premium — matches your brand and directly connects to your consult form. Built for conversion. 7–14 day build.</p></div>
+<div class="icon-box" style="margin-bottom:12px;"><span class="icon">⚙️</span><h4>Custom CRM Build</h4><p>A system designed specifically around how Spjute Strong operates — lead tracking, client status, onboarding, and payment management in one place. No more spreadsheets. Fully live within ~30 days.</p></div>
+<div class="icon-box" style="margin-bottom:12px;"><span class="icon">⚡</span><h4>Automated Consult Flow</h4><p>SMS auto-responses to every consult inquiry. Zero leads fall through the cracks — Haley doesn't have to manually follow up on every single form submission.</p></div>
+<div class="icon-box"><span class="icon">🔗</span><h4>One-Link Onboarding</h4><p>DocuSign agreement + payment link + intake form in a single combined flow. Client signs, pays, and completes intake in one step — no back-and-forth.</p></div>
+</div>
+<div>
+<h4 style="font-family:var(--font-head);font-size:16px;letter-spacing:1px;color:var(--accent);margin-bottom:16px;">INTEGRATIONS + AUTOMATION</h4>
+<div class="icon-box" style="margin-bottom:12px;"><span class="icon">🔄</span><h4>Trainerize Auto-Sync</h4><p>New clients automatically added to Trainerize with habits pre-assigned upon payment. No manual copy-paste — what used to take Haley 15 minutes per client now happens instantly.</p></div>
+<div class="icon-box" style="margin-bottom:12px;"><span class="icon">📋</span><h4>Intake Form Automation</h4><p>Intake responses automatically flow into Monday.com with client notes formatted for CJ and Syd to review. Feels personalized without the manual work.</p></div>
+<div class="icon-box" style="margin-bottom:12px;"><span class="icon">🎫</span><h4>FitCon Event Form</h4><p>Custom form with coaching agreement + embedded $99/month payment link. One-scan onboarding for every FitCon lead — instant conversion.</p></div>
+<div class="icon-box"><span class="icon">🔧</span><h4>Ongoing Support</h4><p>$100/month hosting + active maintenance. As you scale, we scale the systems with you. No rebuilds, no starting over.</p></div>
+</div>
+</div>
+
+<div class="callout" style="margin-top:20px;"><strong style="color:var(--accent);">The Bottom Line:</strong> These systems don't just save time — they create the infrastructure for steady, sustainable growth. Proper systems in place means Haley is freed up to help CJ and Syd with the things that actually matter, instead of spending hours on tasks that should be automated.</div>
+</div>
+<div class="slide-footer"><span>Keystone Consulting Group</span><span>7 / 9</span></div>
+</div>
+
+<!-- ==================== SLIDE 8: INVESTMENT ==================== -->
+<div class="slide" id="slide-8">
+<div class="slide-inner top-align">
+<h2 class="section-header anim-fade" data-anim="fade">Transparent Pricing. No Hidden Fees.</h2>
+
+<div class="grid-2" style="margin-bottom:20px;">
+<div class="price-card icon-box">
+<h4>Payment Processing</h4>
+<div class="price">$29/mo</div>
+<ul>
+<li>0% processing fees (dual pricing)</li>
+<li>2 months FREE</li>
+<li>No contracts, cancel anytime</li>
+<li>Chargeback protection framework included</li>
+<li>Dedicated account monitoring</li>
+<li>Chargeback 911 setup (exploring as add-on)</li>
+</ul>
+</div>
+<div class="price-card icon-box">
+<h4>CRM + Website Build</h4>
+<div class="price">$5,000 <span style="font-size:16px;color:var(--gray);font-family:var(--font-body);">one-time</span></div>
+<ul>
+<li>$2,500 upfront (project kickoff)</li>
+<li>$2,500 upon completion</li>
+<li>Custom website rebuild (7–14 day build)</li>
+<li>Custom CRM with all integrations (~30 days)</li>
+<li>Trainerize + DocuSign + payment automation</li>
+<li>FitCon form build</li>
+<li>Complete onboarding automation</li>
+</ul>
+</div>
+</div>
+
+<div class="grid-2">
+<div class="price-card icon-box">
+<h4>Ongoing Support</h4>
+<div class="price">$100/mo</div>
+<ul>
+<li>Starts month after final $2,500 payment</li>
+<li>Hosting</li>
+<li>Ongoing tweaks and adjustments</li>
+<li>System maintenance</li>
+<li>Priority support</li>
+</ul>
+</div>
+<div class="price-card icon-box">
+<h4>One-Time Migration</h4>
+<div class="price">~$500–$800 <span style="font-size:16px;color:var(--gray);font-family:var(--font-body);">estimated</span></div>
+<ul>
+<li>Stripe card data retrieval for recurring clients</li>
+<li>Seamless transfer to new processing</li>
+<li>Zero payment interruption</li>
+<li>Billed at actual cost, no markup</li>
+</ul>
+</div>
+</div>
+
+<div class="roi-callout" style="margin-top:24px;">
+<p style="font-size:16px;color:var(--white);line-height:1.7;"><strong>You're investing $5,000 once + $129/month ongoing</strong> — to save <span style="color:var(--accent);font-weight:700;">$29,000+ annually</span> AND protect your merchant account from being shut down.</p>
+<p style="margin-top:12px;color:var(--accent);font-weight:600;font-size:18px;">Payback period: under 3 months.</p>
+</div>
+</div>
+<div class="slide-footer"><span>Keystone Consulting Group</span><span>8 / 9</span></div>
+</div>
+
+<!-- ==================== SLIDE 9: CTA ==================== -->
+<div class="slide" id="slide-9">
+<div class="slide-inner center-align" style="text-align:center;">
+<h2 class="section-header anim-fade" data-anim="fade" style="font-size:clamp(32px,5vw,48px);">You've Built Something Worth Protecting.</h2>
+<p class="section-sub anim-fade" data-anim="fade" style="text-align:center;max-width:600px;margin:0 auto 32px;">Here's how we move forward.</p>
+
+<div style="text-align:left;max-width:600px;margin:0 auto 32px;">
+<div class="step"><div class="step-num">1</div><div><h4>Approve the Proposal</h4><p>Sign off on the scope and we kick off immediately.</p></div></div>
+<div class="step"><div class="step-num">2</div><div><h4>Processing Migration + Protection</h4><p>Payments Hub approval, Stripe data migration, dual pricing activation, chargeback framework deployed. Target: live within 7–10 days.</p></div></div>
+<div class="step"><div class="step-num">3</div><div><h4>Website + CRM Build</h4><p>Website live within 7–14 days. CRM fully rolled out within ~30 days. Weekly progress updates throughout.</p></div></div>
+<div class="step"><div class="step-num">4</div><div><h4>Launch + Scale</h4><p>Your new system goes live. You focus on coaching. We keep everything running.</p></div></div>
+</div>
+
+<div class="grid-2" style="max-width:500px;margin:0 auto 32px;">
+<div class="contact-card">
+<h4>Hunter Lodwick</h4>
+<a href="tel:5055066563">505-506-6563</a>
+<a href="mailto:hunter@keystoneconsultingg.com">hunter@keystoneconsultingg.com</a>
+</div>
+<div class="contact-card">
+<h4>Seth Redford</h4>
+<a href="tel:3855223239">385-522-3239</a>
+<a href="mailto:seth@keystoneconsultingg.com">seth@keystoneconsultingg.com</a>
+</div>
+</div>
+
+<a href="https://www.keystoneconsultingg.com/" target="_blank" rel="noopener noreferrer" class="cta-btn">Let's Build This</a>
+
+<p style="color:var(--gray);font-size:14px;margin-top:24px;">No contracts. 2 months Payments Hub free. The only real risk is staying where you are.</p>
+</div>
+<div class="slide-footer"><span>Keystone Consulting Group</span><span>9 / 9</span></div>
+</div>
+
+<div class="powered"><a href="https://www.keystoneconsultingg.com/" target="_blank" rel="noopener noreferrer">Powered by Keystone Consulting Group</a></div>
+
+</div><!-- /.deck -->
+
+<!-- NAV -->
+<div class="nav">
+<button class="nav-btn" id="prevBtn" aria-label="Previous slide">←</button>
+<span class="nav-counter"><span id="curNum">1</span> / <span id="totNum">9</span></span>
+<button class="nav-btn" id="nextBtn" aria-label="Next slide">→</button>
+</div>
+
+<script>
+(function(){
+const deck=document.getElementById('deck');
+const slides=deck.querySelectorAll('.slide');
+const total=9;
+let cur=1;
+const bar=document.getElementById('progressBar');
+const curEl=document.getElementById('curNum');
+
+function go(n){
+if(n<1||n>total||n===cur)return;
+slides.forEach(s=>s.classList.remove('active'));
+cur=n;
+const next=slides[n-1];
+if(next){next.scrollTop=0;next.classList.add('active');triggerAnims(next);}
+bar.style.width=(n/total*100)+'%';
+curEl.textContent=n;
+}
+document.getElementById('prevBtn').onclick=()=>go(cur-1);
+document.getElementById('nextBtn').onclick=()=>go(cur+1);
+
+// Keyboard
+document.addEventListener('keydown',e=>{
+if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(cur+1);}
+if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1);}
+});
+
+// Touch swipe — only horizontal, with generous threshold to avoid conflicting with scroll
+let tx=0,ty=0,swiping=false;
+deck.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;swiping=true;},{passive:true});
+deck.addEventListener('touchmove',e=>{
+if(!swiping)return;
+const dy=Math.abs(e.touches[0].clientY-ty);
+if(dy>30)swiping=false; // user is scrolling vertically, cancel swipe
+},{passive:true});
+deck.addEventListener('touchend',e=>{
+if(!swiping)return;
+const dx=e.changedTouches[0].clientX-tx;
+if(Math.abs(dx)>80){dx<0?go(cur+1):go(cur-1);}
+swiping=false;
+},{passive:true});
+
+// Animations
+function triggerAnims(slide){
+// Fade elements
+slide.querySelectorAll('[data-anim="fade"]').forEach((el,i)=>{
+setTimeout(()=>{el.style.opacity='1';el.style.transform='translateY(0)';},100+i*100);
+});
+// Count-ups
+slide.querySelectorAll('[data-count]').forEach(el=>{
+if(el.dataset.counted)return;el.dataset.counted='1';
+const target=parseFloat(el.dataset.count);
+const prefix=el.dataset.prefix||'';
+const suffix=el.dataset.suffix||'';
+const dec=parseInt(el.dataset.decimals)||0;
+const dur=el.dataset.dur?parseInt(el.dataset.dur):1200;
+const start=performance.now();
+function tick(now){
+const p=Math.min((now-start)/dur,1);
+const eased=1-Math.pow(1-p,3);
+const v=eased*target;
+el.textContent=prefix+(dec?v.toFixed(dec):Math.round(v).toLocaleString())+suffix;
+if(p<1)requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+});
+// Table rows
+slide.querySelectorAll('.data-table tr').forEach((tr,i)=>{setTimeout(()=>tr.classList.add('visible'),200+i*100);});
+// Callouts
+slide.querySelectorAll('.callout').forEach((c,i)=>{setTimeout(()=>c.classList.add('visible'),400+i*200);});
+// Icon boxes
+slide.querySelectorAll('.icon-box').forEach((b,i)=>{setTimeout(()=>b.classList.add('visible'),200+i*150);});
+// Steps
+slide.querySelectorAll('.step').forEach((s,i)=>{setTimeout(()=>s.classList.add('visible'),300+i*200);});
+// Receipts
+slide.querySelectorAll('.receipt-left,.receipt-right').forEach((r,i)=>{setTimeout(()=>r.classList.add('visible'),300+i*200);});
+// Bar fills
+slide.querySelectorAll('.bar-fill').forEach((b,i)=>{setTimeout(()=>b.classList.add('visible'),400+i*150);});
+// Accent HR
+const hr=slide.querySelector('.accent-hr');if(hr)setTimeout(()=>hr.classList.add('visible'),400);
+}
+
+// Init first slide
+triggerAnims(slides[0]);
+
+// Set initial anim styles
+document.querySelectorAll('[data-anim="fade"]').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity .6s ease-out, transform .6s ease-out';});
+triggerAnims(slides[0]);
+})();
+</script>
+</body>
+</html>
